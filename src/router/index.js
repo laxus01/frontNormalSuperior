@@ -12,6 +12,7 @@ import Groups from '../views/Groups'
 import Enrollment from '../views/Enrollment'
 import Practices from '../views/Practices'
 import Assign from '../views/Assign'
+import ConsolidatedRatings from '../views/ConsolidatedRatings'
 
 
 Vue.use(VueRouter)
@@ -79,6 +80,13 @@ const routes = [
       {
         path: '/assign',
         component: Assign,
+        meta: {
+          requiresAuth: true,
+        }, 
+      },
+      {
+        path: '/consolidated-ratings',
+        component: ConsolidatedRatings,
         meta: {
           requiresAuth: true,
         }, 

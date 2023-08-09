@@ -100,21 +100,16 @@ export default {
               title: "Por asignar",
               to: "/assign",
             },
-            {
-              action: "checklist",
-              title: "Notas",
-              to: "/list-sales",
-            },
           ],
         },   
         {
-          action: "feed",
+          action: "assignment",
           title: "Informes",
           items: [
             {
+              action: "checklist",
               title: "Consolidado notas",
-              action: "article",
-              to: "/list-receivable",
+              to: "/consolidated-ratings",
             },
           ],
         },
