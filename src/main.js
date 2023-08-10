@@ -10,7 +10,7 @@ import './plugins/vuetify-money.js';
 Vue.config.productionTip = false
 Vue.use(Filters)
 
-axios.defaults.baseURL = 'backnormalsuperior-production.up.railway.app/'
+axios.defaults.baseURL = 'https://backnormalsuperior-production.up.railway.app/'
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
