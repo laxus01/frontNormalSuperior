@@ -65,7 +65,7 @@
                     <v-autocomplete prepend-icon="person_add_alt" @click:prepend="changeDialog"
                       :items="itemsSupervisor" return-object item-value="value" item-text="supervisor"
                       no-data-text="Supervisor no registrado" label="Supervisor" :menu-props="{ maxHeight: 100 }"
-                      v-model="supervisor"></v-autocomplete>
+                      v-model="editedItem.supervisor"></v-autocomplete>
                   </v-col>
                 </v-row>
               </v-container>

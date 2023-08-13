@@ -13,6 +13,7 @@ import Enrollment from '../views/Enrollment'
 import Practices from '../views/Practices'
 import Assign from '../views/Assign'
 import ConsolidatedRatings from '../views/ConsolidatedRatings'
+import PrintPractices from '../views/PrintPractices'
 
 
 Vue.use(VueRouter)
@@ -22,6 +23,15 @@ const routes = [
     path: '/',
     name: 'Home',  
     component: HomeView  
+  },
+  {
+    path: '/print-practices/:data/type/:type',
+    name: 'PrintPractices',    
+    props: true,
+    component: PrintPractices,
+    meta: {
+      requiresAuth: true,
+    },  
   },
   {
     path: '/dashboard',
