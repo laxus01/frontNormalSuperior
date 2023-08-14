@@ -79,9 +79,6 @@
     <template v-slot:[`item.actions`]="{ item }">
       <v-icon small class="mr-2" @click="deleteItem(item)"> delete </v-icon>
     </template>
-    <div id="printSection">
-      <h1>HOLA MUNDO</h1>
-    </div>
   </v-data-table>
 </template>
       
@@ -163,12 +160,6 @@ export default {
       this.desserts = await data.data.desserts;
     },
 
-    editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-
     deleteItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);
@@ -176,7 +167,7 @@ export default {
     },
 
     deleteItemConfirm() {
-      this.deleteTeacher(this.editedItem);
+      this.deletePractice(this.editedItem);
       this.closeDelete();
     },
 
@@ -205,40 +196,9 @@ export default {
       this.close();
     },
 
-    async deleteTeacher(editedItem) {
+    async deletePractice(editedItem) {
       axios
-        .put(`api/teachers/inactivate/${editedItem.id}`)
-        .then(() => {
-          this.getPractices();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-
-    async updateTeacher(editedItem) {
-      axios
-        .put(`api/teachers/update/${editedItem.id}`, {
-          nombre: editedItem.nombre,
-          telefono: editedItem.telefono,
-          correo: editedItem.correo,
-        })
-        .then(() => {
-          this.getPractices();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-
-    async setTeacher(editedItem) {
-      axios
-        .post(`api/teachers`, {
-          nombre: editedItem.nombre,
-          telefono: editedItem.telefono,
-          correo: editedItem.correo,
-          sede_id: editedItem.sede.id,
-        })
+        .put(`api/practices/inactivate/${editedItem.id}`)
         .then(() => {
           this.getPractices();
         })
