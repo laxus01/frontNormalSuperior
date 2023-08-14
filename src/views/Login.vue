@@ -59,7 +59,6 @@ export default {
           if (result) {
             const authToken = result.data.res.token
             window.localStorage.setItem('authToken', authToken)
-            debugger
             this.$router.push('/dashboard')
           }
         });

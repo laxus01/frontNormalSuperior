@@ -29,6 +29,9 @@ const routes = [
     name: 'PrintPractices',    
     props: true,
     component: PrintPractices,
+    meta: {
+      requiresAuth: true,
+    },  
   },
   {
     path: '/dashboard',

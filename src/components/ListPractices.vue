@@ -249,7 +249,7 @@ export default {
 
     filterQueryPrint(typeFilter) {
       let searchBy = typeFilter === 1 ? this.grupo.id : typeFilter === 2 ? this.institucion.id : this.supervisor.id;
-      window.open("https://frontnormalsuperior-production.up.railway.app/print-practices/"+searchBy+"/type/"+typeFilter , 'ventana1' , 'width=1800,height=800,scrollbars=yes');
+      this.$router.push(`/print-practices/${searchBy}/type/${typeFilter}`)
     },
 
   },
