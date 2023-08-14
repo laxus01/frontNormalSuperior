@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="print">
+    <div>
+      <h3>¡No existen registros para mostrar!</h3>
+    </div>
+    <div class="print" v-if="desserts.length > 0">
       <div v-if="type === '1'">
         <div class="title"> PRACTICAS POR GRUPO </div>
         <div class="mt-5">

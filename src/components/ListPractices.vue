@@ -249,7 +249,7 @@ export default {
 
     filterQueryPrint(typeFilter) {
       let searchBy = typeFilter === 1 ? this.grupo.id : typeFilter === 2 ? this.institucion.id : this.supervisor.id;
-      this.$router.push(`/print-practices/${searchBy}/type/${typeFilter}`)
+      searchBy && this.$router.push(`/print-practices/${searchBy}/type/${typeFilter}`)
     },
 
   },
