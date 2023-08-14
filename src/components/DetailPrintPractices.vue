@@ -32,12 +32,12 @@ import axios from "axios";
 
 export default {
   data: () => ({
+    newPrint: [],
+    desserts: [],
   }),
   props: {
     print: "",
     type: 0,
-    newPrint: [],
-    desserts: [],
   },
   methods: {    
 
