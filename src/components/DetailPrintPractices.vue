@@ -1,27 +1,35 @@
 <template>
-  <div v-if="type === 1" class="content">
+  <div>
     <div class="print">
-      <div class="title"> PRACTICAS POR GRUPO </div>
-      <div class="subtitle">
-        Grupo: {{ newPrint[0].grupo }}
+      <div v-if="type === '1'">
+        <div class="title"> PRACTICAS POR GRUPO </div>
+        <div class="mt-5">
+          Grupo: {{ desserts[0].grupoxsemestre }}
+        </div>
+      </div>
+      <div v-if="type === '2'">
+        <div class="title"> PRACTICAS POR INSTITUCIÓN </div>
+        <div class="mt-5">
+          Institución: {{ desserts[0].institucion }}
+        </div>
+      </div>
+      <div v-if="type === '3'">
+        <div class="title"> PRACTICAS POR SUPERVISOR </div>
+        <div class="mt-5">
+          Supervisor: {{ desserts[0].supervisor }}
+        </div>
+      </div>
+      <div class="mt-1">
+        Total: {{ desserts.length }}
       </div>
       <div class="table">
-        <div class="titulos">
-          <div>Maestro F.</div>
-          <div>Institución</div>
-          <div>Sede</div>
-          <div>Jornada</div>
-          <div>Grupo</div>
-          <div>Maestro T.</div>
-        </div>
-        <div class="titulos" v-for="item in newPrint" :key="item.id">
-          <div>{{item.profesor}}</div>
-          <div>{{item.institucion}}</div>
-          <div>{{item.sede}}</div>
-          <div>{{item.jornada}}</div>
-          <div>{{item.grupo}}</div>
-          <div>{{item.estudiante}}</div>
-        </div>
+        <v-data-table
+          :headers="this.type === '1' ? headersGroup : this.type === '2' ? headersInstitution : headersSupervisor"
+          :items="desserts"
+          class="elevation-1"
+          disable-pagination
+          hide-default-footer
+        ></v-data-table>
       </div>
     </div>
   </div>
@@ -34,32 +42,80 @@ export default {
   data: () => ({
     newPrint: [],
     desserts: [],
+    headersGroup: [
+      { text: "Maestro F", value: "estudiante" },
+      { text: "Institución", value: "institucion" },
+      { text: "Sede", value: "sede" },
+      { text: "Jornada", value: "jornada" },
+      { text: "Grado", value: "grado" },
+      { text: "Grupo", value: "grupo" },
+      { text: "Maestro T", value: "profesor" },
+    ],
+    headersInstitution: [
+      { text: "Sede", value: "sede" },
+      { text: "Jornada", value: "jornada" },
+      { text: "Grado", value: "grado" },
+      { text: "Grupo", value: "grupo" },
+      { text: "Maestro T", value: "profesor" },
+      { text: "Maestro F", value: "estudiante" },
+      { text: "Grupo", value: "grupoxsemestre" },
+      { text: "Tipo", value: "tipo" },
+    ],
+    headersSupervisor: [
+      { text: "Maestro F", value: "estudiante" },
+      { text: "Telefono", value: "telefonomf" },
+      { text: "Institución", value: "institucion" },
+      { text: "Sede", value: "sede" },
+      { text: "Jornada", value: "jornada" },
+      { text: "Grado", value: "grado" },
+      { text: "Grupo", value: "grupo" },
+      { text: "Maestro T", value: "profesor" },
+      { text: "Telefono", value: "telefonomt" },
+    ],
   }),
   props: {
     print: "",
-    type: 0,
+    type: "",
   },
-  methods: {    
-
+  methods: { 
+    
     async getPractices() {
-      let data = await axios.get("api/practices");
+      console.log(this.type);
+      this.type === '1' ? this.getPracticesByGroup() : this.type === '2' ? this.getPracticesByInstitution() : this.getPracticesBySupervisor();
+    },
+
+    async getPracticesByGroup() {
+      let data = await axios.get(`api/practices/getPracticesByGroup/${this.print}`);
+      this.desserts = await data.data.desserts;
+    },   
+
+    async getPracticesByInstitution() {
+      let data = await axios.get(`api/practices/getPracticesByInstitution/${this.print}`);
+      this.desserts = await data.data.desserts;
+    },   
+
+    async getPracticesBySupervisor() {
+      let data = await axios.get(`api/practices/getPracticesBySupervisor/${this.print}`);
       this.desserts = await data.data.desserts;
     },
 
-    async filterQueryPrint() {
-      this.newPrint = this.desserts.filter(
-        item => this.type === 1 ? 
-        item.grupo_id === this.print : 
-        this.type === 2 ? 
-        item.institucion_id === this.print : 
-        item.supervisor_id === this.print
-      );
-    },
   },
-  async created() {    
-    await this.getPractices();
-    await this.filterQueryPrint();
+  created() {    
+    this.getPractices();
   },
 };
 </script>
+
+<style lang="scss">
+
+.print {
+  width: 100%;
+  padding: 20px;
+}
+
+.table {
+  margin-top: 30px;
+}
+
+</style>
     
