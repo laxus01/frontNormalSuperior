@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div v-if="desserts.length === 0">
       <h3>¡No existen registros para mostrar!</h3>
     </div>
     <div class="print" v-if="desserts.length > 0">
