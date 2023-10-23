@@ -187,15 +187,6 @@ export default {
       });
     },
 
-    save() {
-      if (this.editedIndex > -1) {
-        this.updateTeacher(this.editedItem);
-      } else {
-        this.setTeacher(this.editedItem);
-      }
-      this.close();
-    },
-
     async deletePractice(editedItem) {
       axios
         .put(`api/practices/inactivate/${editedItem.id}`)
