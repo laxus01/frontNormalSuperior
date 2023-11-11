@@ -33,13 +33,14 @@
                       v-model="judgmentSelected"></v-autocomplete>
                   </v-col>
                   <v-col cols="12">
-                    <v-text-field label="Nota" v-model="record" class="centered-input" ></v-text-field>
+                    <v-text-field label="Nota" v-model="record" class="centered-input"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
             </v-card-text>
 
             <v-card-actions>
+              <v-alert v-if="stateNota" type="success" dense>Registro exitoso</v-alert>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" text @click="close">
                 Cancelar
@@ -82,6 +83,7 @@ export default {
     editedIndex: -1,
     search: "",
     dialog: false,
+    stateNota: false,
     desserts: [],
     listCampusByInstitution: [],
     editedItem: {},
@@ -145,7 +147,6 @@ export default {
 
     close() {
       this.dialog = false;
-      this.getConsolidateRecords();
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
@@ -183,8 +184,12 @@ export default {
           juicio_id: this.judgmentSelected.id,
           nota: this.record,
         })
-        .then(() => {
-          console.log("Registro exitoso");
+        .then(() => {   
+          this.getConsolidateRecords();       
+          this.stateNota = true;
+          setTimeout(() => {
+          this.stateNota = false;
+          }, "1000");
         })
         .catch((err) => {
           console.log(err);
@@ -213,5 +218,6 @@ export default {
 <style>
 .centered-input input {
   text-align: center
-}</style>
+}
+</style>
     
