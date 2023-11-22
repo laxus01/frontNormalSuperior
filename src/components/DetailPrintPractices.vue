@@ -83,7 +83,6 @@ export default {
   methods: { 
     
     async getPractices() {
-      console.log(this.type);
       this.type === '1' ? this.getPracticesByGroup() : this.type === '2' ? this.getPracticesByInstitution() : this.getPracticesBySupervisor();
     },
 

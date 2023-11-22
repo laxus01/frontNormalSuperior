@@ -14,6 +14,7 @@ import Practices from '../views/Practices'
 import Assign from '../views/Assign'
 import ConsolidatedRatings from '../views/ConsolidatedRatings'
 import PrintPractices from '../views/PrintPractices'
+import PrintRecords from '../views/PrintRecords'
 
 
 Vue.use(VueRouter)
@@ -29,6 +30,15 @@ const routes = [
     name: 'PrintPractices',    
     props: true,
     component: PrintPractices,
+    meta: {
+      requiresAuth: true,
+    },  
+  },
+  {
+    path: '/print-records/:data',
+    name: 'PrintRecords',    
+    props: true,
+    component: PrintRecords,
     meta: {
       requiresAuth: true,
     },  

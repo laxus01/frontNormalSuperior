@@ -11,6 +11,9 @@
             <v-btn rounded color="blue darken-3" dark class="mb-2" v-bind="attrs" v-on="on">
               <v-icon>checklist</v-icon>
             </v-btn>
+            <v-btn @click="dialogPrint = true" rounded color="blue darken-3" dark class="mb-2 mr-5">
+              <v-icon>print</v-icon>
+            </v-btn>
           </template>
           <v-card>
             <v-card-title>
@@ -49,6 +52,30 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialogPrint" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Imprimir consolidado de notas</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                    <v-autocomplete append-icon="print" @click:append="filterQueryPrint" :items="itemsGrupo"
+                      return-object label="Grupo*" item-value="value" item-text="grupo" no-data-text="Grupo no registrado"
+                      :menu-props="{ maxHeight: 100 }" v-model="grupo"></v-autocomplete>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="close">
+                Cancelar
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+          </v-dialog>
       </v-toolbar>
     </template>
     <!-- <template v-slot:[`item.actions`]="{ item }">
@@ -83,9 +110,11 @@ export default {
     editedIndex: -1,
     search: "",
     dialog: false,
+    dialogPrint: false,
     stateNota: false,
     desserts: [],
     listCampusByInstitution: [],
+    itemsGrupo: [],
     editedItem: {},
     studentSelected: {},
     judgmentSelected: {},
@@ -107,8 +136,13 @@ export default {
 
   methods: {
 
+    async getGroups() {
+      let data = await axios.get("api/students/getGroups");
+      this.itemsGrupo = await data.data.desserts;
+    },
+
     async getConsolidateRecords() {
-      let data = await axios.get("api/practices/getConsolidateRecords/4");
+      let data = await axios.get("api/practices/getConsolidateRecords");
       this.desserts = await data.data.desserts;
     },
 
@@ -206,11 +240,16 @@ export default {
       }
     },
 
+    filterQueryPrint() {
+      this.$router.push(`/print-records/${this.grupo.id}`)
+    },
+
   },
   created() {
     this.getConsolidateRecords();
     this.getJudgments();
     this.getStudentsByPracticeActive();
+    this.getGroups();
   },
 };
 </script>
