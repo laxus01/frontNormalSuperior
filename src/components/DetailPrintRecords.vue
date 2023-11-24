@@ -38,6 +38,7 @@ export default {
             { text: "INVESTIGACIÓN", value: "nota_investigacion", align: "center" },
             { text: "MAESTRO TITULAR", value: "nota_maestrotitular", align: "center" },
             { text: "SUPERVISOR", value: "nota_supervisor", align: "center" },
+            { text: "DEFINITIVA", value: "definitiva", align: "center" },
             /* { text: "Acción", value: "actions", sortable: false }, */
         ],
         desserts: [],
@@ -50,7 +51,19 @@ export default {
 
         async getRecordsBygroup() {
             let data = await axios.get(`api/practices/getConsolidateRecordsByGroup/${this.print}`);
-            this.desserts = await data.data.desserts;
+            let records = await data.data.desserts;
+            records.forEach((records) => {
+                this.desserts.push({
+                    id: records.id,
+                    grupo: records.grupo,
+                    nota_ppi: records.nota_ppi,
+                    nota_investigacion: records.nota_investigacion,
+                    nota_maestrotitular: records.nota_maestrotitular,
+                    nota_supervisor: records.nota_supervisor,
+                    definitiva: ((records.nota_ppi * 0.3) + (records.nota_investigacion * 0.3) + (records.nota_maestrotitular * 0.2) + (records.nota_supervisor * 0.2)).toFixed(1),
+                });
+            });
+
         },
 
     },
