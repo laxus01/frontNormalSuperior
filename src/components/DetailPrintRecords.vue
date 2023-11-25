@@ -54,7 +54,7 @@ export default {
             let records = await data.data.desserts;
             records.forEach((records) => {
                 this.desserts.push({
-                    id: records.id,
+                    nombre: records.nombre,
                     grupo: records.grupo,
                     nota_ppi: records.nota_ppi,
                     nota_investigacion: records.nota_investigacion,
