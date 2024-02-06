@@ -234,7 +234,7 @@ export default {
         .post(`api/students/saveEnroll`, {
           estudiante_id: editedItem.nombre2.id,
           grupo_id: editedItem.grupo2.id,
-          periodo_id: 4,
+          periodo_id: 5,
         })
         .then(() => {
           this.getStudentEnrroll();
@@ -249,7 +249,7 @@ export default {
         .post(`api/students/saveEnrollGroup`, {
           grupo_anterior: this.grupoAnterior.id,
           grupo_actual: this.grupoActual.id,
-          periodo_id: 4,
+          periodo_id: 5,
         })
         .then(() => {
           this.getStudentEnrroll();

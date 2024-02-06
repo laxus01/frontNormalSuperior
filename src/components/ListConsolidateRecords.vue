@@ -214,7 +214,7 @@ export default {
       axios
         .post(`api/practices/saveRecord`, {
           solicitud_id: this.solicitud_id,
-          periodo_id: 4,
+          periodo_id: 5,
           juicio_id: this.judgmentSelected.id,
           nota: this.record,
         })
