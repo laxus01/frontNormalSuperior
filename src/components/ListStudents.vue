@@ -19,6 +19,9 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12">
+                      <v-text-field label="Identificación" v-model="editedItem.identificacion" required></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
                       <v-text-field label="Nombre" v-model="editedItem.nombre" required></v-text-field>
                     </v-col>
                     <v-col cols="12">
@@ -168,6 +171,7 @@
       async updateStudent(editedItem) {
         axios
           .put(`api/students/update/${editedItem.id}`, {
+            identificacion: editedItem.identificacion,
             nombre: editedItem.nombre,
             telefono: editedItem.telefono,
             correo: editedItem.correo,
@@ -183,6 +187,7 @@
       async setStudent(editedItem) {
         axios
           .post(`api/students`, {
+            identificacion: editedItem.identificacion,
             nombre: editedItem.nombre,
             telefono: editedItem.telefono,
             correo: editedItem.correo,
