@@ -101,8 +101,8 @@ export default {
     listCampusByInstitution: [],
     defaultItem: {
       sede: "",
-      coordinador: "",
-      telefono: "",
+      grado: "",
+      grupo: "",
     },
     defaultNewDegree: {
       grado: "",
