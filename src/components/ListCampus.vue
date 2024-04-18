@@ -62,6 +62,9 @@
                     <v-text-field label="Teléfono" v-model="editedItem.telefono"></v-text-field>
                   </v-col>
                   <v-col cols="12">
+                    <v-text-field label="Dirección" v-model="editedItem.direccion"></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
                     <v-autocomplete prepend-icon="person_add_alt" @click:prepend="changeDialog"
                       :items="itemsSupervisor" return-object item-value="value" item-text="supervisor"
                       no-data-text="Supervisor no registrado" label="Supervisor" :menu-props="{ maxHeight: 100 }"
@@ -122,9 +125,10 @@ export default {
     headers: [
       { text: "Institución", align: "start", value: "institucion", width: "30%" },
       { text: "Sede", value: "sede", width: "20%" },
-      { text: "Coordinador", value: "coordinador", width: "15%" },
+      { text: "Coordinador", value: "coordinador", width: "10%" },
       { text: "Telefono", value: "telefono", width: "10%" },
-      { text: "Supervisor", value: "supervisor", width: "15%" },
+      { text: "Dirección", value: "direccion", width: "10%" },
+      { text: "Supervisor", value: "supervisor", width: "10%" },
       { text: "Acción", value: "actions", width: "10%", sortable: false },
     ],
     editedIndex: -1,
@@ -233,7 +237,8 @@ export default {
           sede: editedItem.sede,
           coordinador: editedItem.coordinador,
           telefono: editedItem.telefono,
-          supervisor_id: editedItem.supervisor.id,
+          direccion: editedItem.direccion,
+          supervisor_id: editedItem.supervisor_id,
         })
         .then(() => {
           this.getCampus();
@@ -249,6 +254,7 @@ export default {
           sede: editedItem.sede,
           coordinador: editedItem.coordinador,
           telefono: editedItem.telefono,
+          direccion: editedItem.direccion,
           institucion_id: editedItem.institucion.id,
           supervisor_id: editedItem.supervisor.id,
         })

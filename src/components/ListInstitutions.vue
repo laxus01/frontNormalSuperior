@@ -28,6 +28,9 @@
                       <v-text-field label="Teléfono" v-model="editedItem.telefono"></v-text-field>
                     </v-col>
                     <v-col cols="12">
+                      <v-text-field label="Dirección" v-model="editedItem.direccion"></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
                         <v-select :items="listSector" v-model="editedItem.sector" density="compact" label="Sector"></v-select>
                     </v-col>
                   </v-row>
@@ -80,6 +83,7 @@
         },
         { text: "Rector", value: "rector" },
         { text: "Telefono", value: "telefono" },
+        { text: "Dirección", value: "direccion" },
         { text: "Sector", value: "sector" },
         { text: "Acción", value: "actions", sortable: false },
       ],
@@ -170,6 +174,7 @@
             institucion: editedItem.institucion,
             rector: editedItem.rector,
             telefono: editedItem.telefono,
+            direccion: editedItem.direccion,
             sector: editedItem.sector,
           })
           .then(() => {
@@ -186,6 +191,7 @@
             institucion: editedItem.institucion,
             rector: editedItem.rector,
             telefono: editedItem.telefono,
+            direccion: editedItem.direccion,
             sector: editedItem.sector,
           })
           .then(() => {
