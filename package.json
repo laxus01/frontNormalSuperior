@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "start": "npx http-server ./dist"
+    "start": "railway run npm run serve"
   },
   "dependencies": {
     "@mdi/font": "^6.7.96",
