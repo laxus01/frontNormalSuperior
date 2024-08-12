@@ -238,7 +238,7 @@ export default {
           coordinador: editedItem.coordinador,
           telefono: editedItem.telefono,
           direccion: editedItem.direccion,
-          supervisor_id: editedItem.supervisor_id,
+          supervisor_id: editedItem.supervisor.id,
         })
         .then(() => {
           this.getCampus();
