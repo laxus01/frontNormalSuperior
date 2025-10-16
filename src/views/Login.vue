@@ -54,7 +54,7 @@ export default {
   methods: {
     async login() {
       await axios
-        .post("users", this.postLogin)
+        .post("users/login", this.postLogin)
         .then(async (result) => {
           if (result) {
             const authToken = result.data.res.token
