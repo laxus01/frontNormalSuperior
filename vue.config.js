@@ -5,5 +5,19 @@ module.exports = defineConfig({
   },
   transpileDependencies: [
     'vuetify'
-  ]
+  ],
+  filenameHashing: true,
+  productionSourceMap: false,
+  configureWebpack: {
+    output: {
+      filename: '[name].[contenthash:8].js',
+      chunkFilename: '[name].[contenthash:8].js'
+    }
+  },
+  css: {
+    extract: {
+      filename: '[name].[contenthash:8].css',
+      chunkFilename: '[name].[contenthash:8].css'
+    }
+  }
 })
