@@ -93,6 +93,7 @@ export default {
   data: () => ({
     items: [],
     listSector: ['OFICIAL', 'PRIVADO'],
+    activePeriodId: null,
     headers: [
       {
         text: "Nombre",
@@ -135,6 +136,15 @@ export default {
   },
 
   methods: {
+
+    async getActivePeriod() {
+      try {
+        let data = await axios.get("api/periods/active");
+        this.activePeriodId = data.data.data.periodo_id;
+      } catch (error) {
+        console.error("Error obteniendo periodo activo:", error);
+      }
+    },
 
     async getGroups() {
       let data = await axios.get("api/students/getGroups");
@@ -214,7 +224,7 @@ export default {
       axios
         .post(`api/practices/saveRecord`, {
           solicitud_id: this.solicitud_id,
-          periodo_id: 8,
+          periodo_id: this.activePeriodId,
           juicio_id: this.judgmentSelected.id,
           nota: this.record,
         })
@@ -246,6 +256,7 @@ export default {
 
   },
   created() {
+    this.getActivePeriod();
     this.getConsolidateRecords();
     this.getJudgments();
     this.getStudentsByPracticeActive();

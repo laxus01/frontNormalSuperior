@@ -130,6 +130,7 @@ export default {
     editedItem: {},
     grupoAnterior: {},
     grupoActual: {},
+    activePeriodId: null,
   }),
   computed: {
     formTitle() {
@@ -148,6 +149,15 @@ export default {
 
   methods: {
   
+    async getActivePeriod() {
+      try {
+        let data = await axios.get("api/periods/active");
+        this.activePeriodId = data.data.data.periodo_id;
+      } catch (error) {
+        console.error("Error obteniendo periodo activo:", error);
+      }
+    },
+
     async getStudents() {
       let data = await axios.get("api/students");
       this.listStudents = await data.data.desserts;
@@ -234,7 +244,7 @@ export default {
         .post(`api/students/saveEnroll`, {
           estudiante_id: editedItem.nombre2.id,
           grupo_id: editedItem.grupo2.id,
-          periodo_id: 8,
+          periodo_id: this.activePeriodId,
         })
         .then(() => {
           this.getStudentEnrroll();
@@ -249,7 +259,7 @@ export default {
         .post(`api/students/saveEnrollGroup`, {
           grupo_anterior: this.grupoAnterior.id,
           grupo_actual: this.grupoActual.id,
-          periodo_id: 8,
+          periodo_id: this.activePeriodId,
         })
         .then(() => {
           this.getStudentEnrroll();
@@ -262,6 +272,7 @@ export default {
 
   },
   created() {
+    this.getActivePeriod();
     this.getStudentEnrroll();
     this.getGroups();
     this.getStudents();
