@@ -217,7 +217,7 @@ export default {
 
     async deleteEnroll(editedItem) {
       axios
-        .delete(`api/students/${editedItem.id}`)
+        .delete(`api/students/deleteEnroll/${editedItem.id}`)
         .then(() => {
           this.getStudentEnrroll();
         })
