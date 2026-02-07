@@ -264,7 +264,7 @@ export default {
 
     async setAssign(item) {
       axios
-        .post(`api/practices`, {
+        .post(`api/practices/saveAssign`, {
           solicitud_id: this.editedItem.id,
           estudiante_id: item.id,
           tipopractica_id: this.typeSelected.id,
